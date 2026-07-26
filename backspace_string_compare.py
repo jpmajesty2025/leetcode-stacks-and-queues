@@ -4,28 +4,18 @@ Given two strings s and t, return true if they are equal when both are typed int
 Note that after backspacing an empty text, the text will continue empty.
 '''
 
-def backspaceCompare(s: str, t: str) -> bool:
-        stack1: list[str] = []
-        for character in s:
-            if character == '#':
-                try:
-                    stack1.pop()
-                except Exception:
-                    pass
-            else:
-                stack1.append(character)
-        
-        s_reduced = "".join(stack1)
+def _reduce_text(value: str) -> str:
+    stack: list[str] = []
 
-        stack2: list[str] = []
-        for character in t:
-            if character == '#':
-                try:
-                    stack2.pop()
-                except Exception:
-                    pass
-            else:
-                stack2.append(character)
-        t_reduced = "".join(stack2)
-        
-        return s_reduced == t_reduced
+    for character in value:
+        if character == "#":
+            if stack:
+                stack.pop()
+        else:
+                stack.append(character)
+
+    return "".join(stack)
+
+
+def backspaceCompare(s: str, t: str) -> bool:
+    return _reduce_text(s) == _reduce_text(t)
