@@ -1,6 +1,10 @@
-# Backspace String Compare Without a Stack
+# Backspace String Take 2: Compare Without a Stack
 
-The stack solution for **Backspace String Compare** is intuitive:
+Problem statement:
+
+> Given two strings where `#` means “backspace,” determine whether both strings produce the same final text.
+
+The stack solution for **Backspace String Compare** is intuitive (see prior post):
 
 - Push typed characters.
 - Pop when `#` appears.
@@ -12,7 +16,7 @@ There is another approach: scan both strings **from right to left**.
 
 Why right to left?
 
-A `#` deletes the character immediately before it. When scanning backward, we can count pending backspaces and skip the characters they remove. That means we only compare characters that would remain visible in the final editor state.
+A `#` deletes the character immediately before it. When scanning backward, we can count pending backspaces and skip the characters they remove without pushing anything onto a stack. That means we only compare characters that would remain visible in the final editor state. and we're only using constant extra space: one charactter at a time, plus a `backspaces` running count.
 
 ```python
 def _previous_visible_character(value: str, index: int) -> tuple[str | None, int]:
@@ -67,4 +71,4 @@ The important lesson is not that one solution always “wins.” It is recognizi
 
 Which would you lead with in an interview: the intuitive stack solution or the O(1)-space optimization?
 
-#Python #Algorithms #DataStructures #TwoPointers #Stack #LeetCode #CodingInterview #ProblemSolving #SoftwareEngineering #CleanCode
+#Python #Algorithms #DataStructures #TwoPointers #Stack #LeetCode #CodingInterview #ProblemSolving #SoftwareEngineering #Tradeoffs

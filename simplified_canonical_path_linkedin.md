@@ -1,13 +1,16 @@
-# Simplifying Unix Paths with a Stack
+# Another Cool Stack Application: Simplifying Absolute Unix Paths
 
 A Unix path can contain more than directory names:
 
 - `.` means “stay in the current directory.”
 - `..` means “move to the parent directory.”
 - Multiple `/` characters act like one separator.
-- Names such as `...` and `....` are ordinary directory names—not special syntax.
+- Names such as `...` and `....` are ordinary directory names — they do not have any special directory semantics such as 'go up two levels from the current directory'
 
-The task: transform an absolute path into its canonical form.
+Problem statement:
+
+> You are given an absolute path for a Unix-style file system, which always begins with a slash '/'. Your task is to transform this absolute path into its simplified canonical path. The task: transform an absolute path into its canonical form.
+
 
 For example:
 
@@ -21,7 +24,7 @@ becomes:
 /home/user/Pictures
 ```
 
-A stack is a natural fit because `..` always removes the **most recently retained directory**.
+Why is a stack the right fit? Because `..` always removes the **most recently retained directory**, kind of like those `#` backspaces we saw in a prior post that looked at reducing strings.
 
 ```python
 def simplify_path(path: str) -> str:
@@ -43,7 +46,7 @@ def simplify_path(path: str) -> str:
 2. Ignore empty components caused by repeated or leading/trailing slashes.
 3. Ignore `.` because it keeps us in the current directory.
 4. On `..`, pop the last directory—unless we are already at root.
-5. Push every other component, including names like `...`.
+5. Push every other non-empty componentthat is not `.` or `..`, including oddities like `...`.
 6. Join the retained components with a single leading `/`.
 
 The stack enforces an important boundary condition: trying to go above the root directory leaves us at `/`.
@@ -58,6 +61,6 @@ Examples:
 
 This solution runs in **O(n)** time and uses **O(n)** space in the worst case, where `n` is the path length. It is clear, efficient, and maps directly to the “undo the last directory” behavior of `..`.
 
-What other problems have you solved where a stack made “go back” logic feel natural?
+If you face a problem where the solution entails 'go back' logic that overwrites or undoes prior data, a stack might be the natural choice of data structure.
 
-#Python #DataStructures #Algorithms #Stack #Unix #FileSystems #LeetCode #ProblemSolving #SoftwareEngineering #CodingInterview
+#LearningInPublic #Python #DataStructures #Algorithms #Stack #Unix #FileSystems #LeetCode #ProblemSolving #SoftwareEngineering #CodingInterview
