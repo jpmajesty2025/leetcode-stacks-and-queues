@@ -13,9 +13,9 @@ Temperatures: [73, 74, 75, 71, 69, 72, 76, 73]
 Wait days:    [ 1,  1,  4,  2,  1,  1,  0,  0]
 ```
 
-A straightforward solution checks every future day for every temperature. That works—but can take **O(n²)** time.
+One options: a brute force solution checking every future day for every temperature. That works—but can take **O(n²)** time.
 
-A better approach uses a **monotonic decreasing stack** of indices.
+We can do better with a **monotonic decreasing stack** of indices.
 
 ```python
 def daily_temperatures(temperatures: list[int]) -> list[int]:
@@ -47,7 +47,7 @@ When a new temperature arrives:
 1. Compare it to the unresolved day at the top.
 2. If it is warmer, today is the first warmer day for that earlier temperature.
 3. Record the day difference and remove the resolved index.
-4. Keep going until the stack is decreasing again.
+4. Keep popping days that are cooler than today, until the stack is decreasing again.
 5. Add today as a new unresolved day.
 
 The word **strictly** matters. Equal temperatures do not resolve an earlier day:
@@ -72,4 +72,4 @@ This is a useful general pattern: when you need the **next greater element** to 
 
 Where else have you seen “next greater,” “next smaller,” or “first future event” patterns?
 
-#Python #Algorithms #DataStructures #MonotonicStack #Stack #LeetCode #ProblemSolving #SoftwareEngineering #CodingInterview #CleanCode
+#LearningInPublis #Python #Algorithms #DataStructures #MonotonicStack #Stack #LeetCode #ProblemSolving #SoftwareEngineering #CodingInterview #CleanCode

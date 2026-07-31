@@ -2,7 +2,7 @@
 
 A common streaming-data problem is to count how many events occurred within a recent time window.
 
-Suppose each request arrives with a strictly increasing timestamp in milliseconds. For every new request at time `t`, return the number of requests in the inclusive interval:
+Assume each request arrives with a monotonically non-decreasing timestamp in milliseconds. For every new request at time `t`, return the number of requests in the inclusive interval:
 
 ```text
 [t - window_ms, t]
@@ -43,7 +43,7 @@ class RecentCounter:
 
 ## Why a deque works
 
-Timestamps arrive in increasing order, so the oldest request is always at the front.
+Timestamps arrive in increasing order, so the oldest requests are always at (or immediately adjacent to) the front.
 
 For each new request:
 
@@ -58,7 +58,7 @@ The inclusive boundary is important:
 
 ## Complexity
 
-A single call can remove several expired timestamps, so its worst-case time is `O(n)`. But every timestamp enters the deque once and leaves once.
+A single call can remove several expired timestamps ,includsing repeats, which are allowed as per the monotone nature of the timestamps. Thus, its worst-case time is `O(n)`. But every timestamp enters the deque once and leaves once.
 
 That gives:
 
