@@ -1,6 +1,6 @@
 # Sliding Window Maximum: Why a Monotonic Deque Turns a Hard Problem into O(n)
 
-Most of the stack and queue problems I have worked through recently have been Easy or Medium. **Sliding Window Maximum** is a meaningful step up: it is a LeetCode **Hard** problem because the obvious solution is easy to write—but too slow at scale.
+Most of the stack and queue problems I have worked through recently have been ranked 'Easy' or 'Medium'. **Sliding Window Maximum** is a meaningful step up: it is a **Hard** problem. Why? The obvious solution is easy to write but suboptimal and does not scale well.
 
 ## The problem
 
@@ -18,16 +18,16 @@ windows:
 [ 5,  3,  6] -> 6
 [ 3,  6,  7] -> 7
 
-result = [3, 3, 5, 5, 6, 7]
+The answer we want to return: result = [3, 3, 5, 5, 6, 7]
 ```
 
-A direct approach computes `max()` for each window.
+The problem description points to the direct but sub-optimal approach: compute `max()` for each window.
 
-That costs **O(n × k)**. When both the array and window are large, repeatedly scanning overlapping windows does unnecessary work.
+That costs **O(n × k)**. For a sufficiently small `k` (small window), perhaps this is fine. However, when both the array and window are large, repeatedly scanning overlapping windows does unnecessary work.
 
 ## The key insight: preserve only viable maximum candidates
 
-Use a `deque` containing **indices**, not values.
+Use a `deque` (double-ended queue) containing **indices** of underlying values, not the values themselves.
 
 It maintains two invariants:
 
@@ -65,7 +65,7 @@ def max_sliding_window(nums: list[int], k: int) -> list[int]:
     return maximums
 ```
 
-## Why can we discard smaller values?
+## Why is itt okay to discard smaller values?
 
 Suppose a current candidate has value `3`, and a later element has value `5`.
 
@@ -132,4 +132,4 @@ The challenge is not memorizing the code. It is learning to ask:
 
 That question often reveals the path from repeated scanning to a linear-time solution.
 
-#Python #Algorithms #DataStructures #Deque #MonotonicDeque #SlidingWindow #LeetCodeHard #ProblemSolving #SoftwareEngineering #CodingInterview
+#LearningInPublic #Python #Algorithms #DataStructures #Deque #MonotonicDeque #SlidingWindow #LeetCodeHard #ProblemSolving #SoftwareEngineering #CodingInterview
