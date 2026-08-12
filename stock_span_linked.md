@@ -1,10 +1,10 @@
 # Online Stock Span: A Monotonic Stack That Remembers Its Own Work
 
-Most monotonic stack problems process a fixed array all at once. **Online Stock Span** asks for something different: answer each query the moment it arrives, with no knowledge of what comes next.
+Monotonic stack problems often process a fixed array all at once. **Online Stock Span** asks for something different: answer each query the moment it arrives, with no knowledge of what comes next.
 
 ## The problem
 
-Design a `StockSpanner` where each call to `next(price)` returns the span: the number of consecutive days, ending today, where the price was less than or equal to today's price.
+Design a `StockSpanner` class where each call to `next(price)` returns the span: the number of consecutive days, ending today, where the price was less than or equal to today's price.
 
 ```text
 calls:  100  80  60  70  60  75  85
@@ -34,6 +34,6 @@ Each `(price, span)` pair is pushed exactly once and popped at most once, ever. 
 
 ## The reusable pattern
 
-This is the "online" cousin of problems like next greater element: instead of precomputing an answer for a fixed array, the stack maintains just enough compressed history to answer the next query in constant amortized time, no matter how long the stream runs. Any streaming problem where "how far back does this streak go" is the question is a candidate for this same trick.
+This is the "online" cousin of problems like next greater element: instead of precomputing an answer for a fixed array, the stack maintains just enough compressed history to answer the next query in constant amortized time, no matter how long the stream runs. Any streaming problem asking "how far back does this streak go?" is a candidate for this same concept.
 
 #Python #Algorithms #DataStructures #Stack #MonotonicStack #LeetCode #ProblemSolving #SoftwareEngineering #CodingInterview #LearningInPublic
