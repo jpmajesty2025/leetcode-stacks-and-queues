@@ -18,7 +18,7 @@ top()     → 0
 getMin()  → -2                (revealed instantly — no rescan needed)
 ```
 
-**Why `<=` and not strictly `<` in the push condition?** This is the detail that makes duplicates work. Consider pushing `1, 2, 1`: both `1`s tie for the minimum. If we only pushed *strictly smaller* values onto `min_stack`, the second `1` would never make it on — and popping the second `1` off the main stack wouldn't touch `min_stack`, silently leaving the *wrong* minimum's bookkeeping intact by coincidence, but breaking the moment the values weren't identical. Using `<=` means every value tied for the minimum gets its own entry in `min_stack`, so `pop` always unwinds correctly regardless of ties.
+**Why `<=` and not strictly `<` in the push condition?** That's how you handle potential duplicate minima. A min is not necessarily global! Consider pushing `1, 2, 1`: both `1`s tie for the minimum. If we only pushed *strictly smaller* values onto `min_stack`, the second `1` would never make it on — and popping the second `1` off the main stack wouldn't touch `min_stack`, silently leaving the *wrong* minimum's bookkeeping intact by coincidence, but breaking the moment the values weren't identical. Using `<=` means every value tied for the minimum gets its own entry in `min_stack`, so `pop` always unwinds correctly regardless of ties.
 
 **The algorithm:**
 
@@ -49,7 +49,5 @@ class MinStack:
 Note that `pop`, `top`, and `getMin` don't guard against an empty stack — the problem guarantees they're only ever called on a non-empty one, so there's no need to swallow that precondition behind a silent `None`. If it's ever violated, Python's own `IndexError` says so immediately, which is more honest than a bug that quietly does nothing.
 
 **Complexity:** O(1) time for every operation — no exceptions, no amortization hand-waving. O(n) space in the worst case, if every element pushed is a new minimum (e.g. a strictly decreasing sequence), so `min_stack` grows in lockstep with `stack`.
-
-Have you run into other problems where the trick isn't a smarter *algorithm* but a smarter piece of *bookkeeping* running alongside it? 👇
 
 #LearningInPublic #LeetCode #DataStructures #Algorithms #Python #SoftwareEngineering #CodingInterview #ProblemSolving #ComputerScience #TechInterview #CleanCode

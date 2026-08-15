@@ -15,8 +15,6 @@
 - Compare `7` (R) vs `9` (D) → `7 < 9`, so R at index 7 bans D at index 9. `radiant = [10]`, `dire = []`.
 - `dire` is empty → **Radiant wins**, despite starting with fewer senators. Two of Radiant's senators got to act *before* two of Dire's did, and that early-mover edge was enough.
 
-**Where the draft had a real bug:** the function signature was `predict_party_victory(self, senate: str)` — a stray `self` parameter with no enclosing class. Calling it the intended way, `predict_party_victory("RD")`, actually raised `TypeError: missing 1 required positional argument: 'senate'`, because `"RD"` silently bound to `self` instead. An easy copy-paste artifact from refactoring a method into a free function — and one that's invisible until you actually try to call it.
-
 **The algorithm:**
 
 ```python
