@@ -12,10 +12,6 @@
 
 That rotation is the entire trick: `n - 1` front-pops-and-back-pushes reposition the last-in element to the front, without ever touching the interior of the queue directly.
 
-**Where the original draft went wrong — a hidden O(n²):**
-
-The first version used a plain Python `list` and called `list.pop(0)` to simulate "pop from front." That looks like a queue operation, but `list.pop(0)` is secretly **O(n)** — removing from the front of a list means shifting every remaining element one slot to the left. Since the rotation loop calls it `n - 1` times, the *intended* O(n) rotation was quietly costing **O(n²)**. The fix: swap the list for `collections.deque`, whose `popleft()` is O(1) — same standard queue operations, but now the underlying cost model actually matches what the algorithm looks like it's doing.
-
 **The algorithm:**
 
 ```python
@@ -51,7 +47,5 @@ class MyStack:
 Note `top()` still has to rotate the peeked element back to the *front* afterward (not just leave it at the back) — otherwise a second `top()` call, or a `push()` right after, would see the wrong element as the new front, silently corrupting the simulated stack's order.
 
 **Complexity:** `push` and `empty` are O(1). `pop` and `top` are O(n) each, dominated by the rotation. This is the standard trade-off for the *single-queue* version of this problem — the harder LeetCode follow-up. (A two-queue version can push, storing new elements to always end up at the front, but pays the O(n) cost on `push` instead of `pop`/`top` — same total work, shifted to a different operation.)
-
-Ever had a "clever" trick quietly hide an O(n²) inside what looked like an O(n) loop? What tipped you off? 👇
 
 #LearningInPublic #LeetCode #DataStructures #Algorithms #Python #SoftwareEngineering #CodingInterview #ProblemSolving #ComputerScience #TechInterview #CleanCode
