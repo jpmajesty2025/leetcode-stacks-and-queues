@@ -1,7 +1,5 @@
 # 🥞 LeetCode Breakdown: Implementing a Queue Using Two Stacks
 
-Some problems are less about algorithms and more about *translating* one data structure's behavior into another's constraints. "Implement Queue using Stacks" is exactly that.
-
 **The problem:** Build a FIFO queue (`push`, `pop`, `peek`, `empty`) using only standard stack operations — push, pop/peek from the top, size, is-empty. No native queues, no cheating with a deque under the hood.
 
 **The core tension:** stacks give you LIFO, you need FIFO. How do you flip the order without re-scanning on every operation?
@@ -40,10 +38,6 @@ class MyQueue:
 
 **Complexity:** amortized O(1) per operation. Each element gets moved between stacks at most once in its lifetime, no matter how many pushes/pops happen around it.
 
-**A subtle catch I caught during review:** the spec explicitly requires an `empty()` method — easy to skip if you're focused on `push`/`pop`/`peek`, but it's part of the contract. Always re-check the full interface against the spec, not just the "interesting" methods.
+With some problems, such as this one, the focus is on *translating* one data structure's behavior into another's constraints.
 
-I verified the implementation with property-based tests using Hypothesis — throwing random sequences of push/pop/peek/empty at it and comparing against a `collections.deque` oracle, including matching error behavior on popping from an empty queue.
-
-What's your favorite "structure A simulating structure B" problem? 👇
-
-#LeetCode #DataStructures #Algorithms #Python #SoftwareEngineering #CodingInterview #ProblemSolving #ComputerScience #TechInterview #CleanCode
+#LearningInPublic #LeetCode #DataStructures #Algorithms #Python #SoftwareEngineering #CodingInterview #ProblemSolving #ComputerScience #TechInterview #CleanCode
