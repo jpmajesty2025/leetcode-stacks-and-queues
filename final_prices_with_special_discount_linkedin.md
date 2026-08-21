@@ -6,7 +6,7 @@ Example: `[8, 4, 6, 2, 3]` → `[4, 2, 4, 2, 3]`. Item `0` (price `8`) gets disc
 
 **The naive approach:** for each item, scan forward until you find a price that's low enough. That's O(n²) in the worst case (think a strictly increasing list, where every item scans all the way to the end and finds nothing).
 
-**The key insight:** This is the same shape as "next smaller element" problems — and a monotonic stack solves it in one linear pass. Walk left to right, keeping a stack of *indices whose discount we haven't found yet*. When the current price is low enough to discount everything sitting on top of the stack, pop and settle those debts immediately.
+**The key insight:** This is the same shape as "next smaller element" problems — and a greedy monotonic stack solves it in one linear pass. Walk left to right, keeping a stack of *indices whose discount we haven't found yet*. When the current price is low enough to discount everything sitting on top of the stack, pop and settle those debts immediately.
 
 ```python
 def final_prices(prices: list[int]) -> list[int]:
@@ -34,7 +34,5 @@ def final_prices(prices: list[int]) -> list[int]:
 Each index is pushed once and popped at most once, so despite the nested `while` loop, total work stays **O(n)** across the whole array — O(n) space for the stack and result.
 
 Same trick as "daily temperatures" and "next greater element" — a stack of "unresolved" indices that get settled the moment a qualifying value shows up.
-
-What's your go-to problem for teaching the monotonic stack pattern? 👇
 
 #LeetCode #DataStructures #Algorithms #Python #SoftwareEngineering #CodingInterview #ProblemSolving #ComputerScience #TechInterview #LearningInPublic #CleanCode
