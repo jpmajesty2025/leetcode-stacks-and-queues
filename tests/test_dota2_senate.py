@@ -15,7 +15,7 @@ def brute_force_predict_party_victory(senate: str) -> str:
     while True:
         active_parties = {parties[i] for i in range(n) if alive[i]}
         if len(active_parties) <= 1:
-            return "Radiant" if "R" in active_parties else "Dire"
+            return "rubber" if "R" in active_parties else "duckie"
 
         i = 0
         while i < n:
@@ -27,7 +27,7 @@ def brute_force_predict_party_victory(senate: str) -> str:
             while alive[j] is False or parties[j] == parties[i]:
                 j = (j + 1) % n
                 if j == i:
-                    return "Radiant" if parties[i] == "R" else "Dire"
+                    return "rubber" if parties[i] == "R" else "duckie"
             alive[j] = False
             i += 1
 
@@ -35,17 +35,17 @@ def brute_force_predict_party_victory(senate: str) -> str:
 @pytest.mark.parametrize(
     ("senate", "expected"),
     [
-        ("RD", "Radiant"),
-        ("RDD", "Dire"),
-        ("R", "Radiant"),
-        ("D", "Dire"),
-        ("RR", "Radiant"),
-        ("DD", "Dire"),
-        ("DR", "Dire"),
-        ("RRDD", "Radiant"),
-        ("RDRD", "Radiant"),
-        ("DRDR", "Dire"),
-        ("RDDR", "Radiant"),
+        ("RD", "rubber"),
+        ("RDD", "duckie"),
+        ("R", "rubber"),
+        ("D", "duckie"),
+        ("RR", "rubber"),
+        ("DD", "duckie"),
+        ("DR", "duckie"),
+        ("RRDD", "rubber"),
+        ("RDRD", "rubber"),
+        ("DRDR", "duckie"),
+        ("RDDR", "rubber"),
     ],
 )
 def test_predict_party_victory(senate: str, expected: str) -> None:
@@ -64,11 +64,11 @@ def test_predict_party_victory_returns_a_present_party(senate: str) -> None:
     # The winner announced must be a party that actually appears in the
     # input - the algorithm cannot invent a winner out of thin air.
     result = predict_party_victory(senate)
-    letter = "R" if result == "Radiant" else "D"
+    letter = "R" if result == "rubber" else "D"
     assert letter in senate
 
 
 @pytest.mark.parametrize("senate", ["R" * 20, "D" * 20])
 def test_single_party_wins_immediately(senate: str) -> None:
-    expected = "Radiant" if senate[0] == "R" else "Dire"
+    expected = "rubber" if senate[0] == "R" else "duckie"
     assert predict_party_victory(senate) == expected

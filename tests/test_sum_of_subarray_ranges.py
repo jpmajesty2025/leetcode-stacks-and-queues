@@ -13,7 +13,7 @@ from sum_of_subarray_ranges import sum_subarray_ranges
         ([5], 0),
         ([2, 2, 2], 0),
         ([3, 2, 1], 4),
-        ([-5, -1, -3], 6),
+        ([-5, -1, -3], 10),
     ],
 )
 def test_sum_subarray_ranges(nums: list[int], expected: int) -> None:
